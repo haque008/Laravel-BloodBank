@@ -31,6 +31,9 @@ class CreateDonorsTable extends Migration
             $table->string('status');
             $table->dateTime('donatingDate');
             $table->timestamps();
+            $table->string('bloodUnit');
+            $table->string('bloodUnitSection');
+            $table->string('bloodUnitCity');
         });
     }
 

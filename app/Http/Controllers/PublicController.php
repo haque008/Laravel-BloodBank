@@ -5,12 +5,14 @@ use App\Donor;
 use App\Seeker;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
 {
     public function donorList()
     {
-      $donor=Donor::all();
+     // $donor=Donor::all();
+        $donor=DB::table('donors')->simplePaginate(3);
       return view('layouts.publicDonorList',compact('donor'));
     }
 
@@ -41,6 +43,13 @@ class PublicController extends Controller
         $seeker->save();
         return redirect('requestList');
 
+    }
+
+    public function show($id)
+    {
+        $form = Donor::where('donorId',$id)->first();
+
+        return view('layouts.donorProfile',compact('form'));
     }
 
 

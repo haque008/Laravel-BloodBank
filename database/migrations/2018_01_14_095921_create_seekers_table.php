@@ -21,7 +21,7 @@ class CreateSeekersTable extends Migration
             $table->string('bloodGroup');
             $table->string('city');
             $table->mediumText('address');
-            $table->integer('phone');
+            $table->string('phone');
             $table->mediumText('note');
             $table->dateTime('requiredDate');
             $table->timestamps();

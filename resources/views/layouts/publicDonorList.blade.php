@@ -20,6 +20,10 @@
                         <th>Address</th>
                         <th>City</th>
                         <th>Status</th>
+                        <th>Blood Unit</th>
+                        <th> Blood Unit Section</th>
+                        <th> Blood Unit city</th>
+                        <th> Action</th>
 
 
 
@@ -37,15 +41,25 @@
                             <td>{{$forms->address}}</td>
                             <td>{{$forms->city}}</td>
                             <td>{{$forms->status}}</td>
+                            <td>{{$forms->bloodUnit}}</td>
+                            <td>{{$forms->bloodUnitSection}}</td>
+                            <td>{{$forms->bloodUnitCity}}</td>
+                            <td>
+                                <a type="submit" class="btn btn-primary" href="{{route('donor_profile',[$forms->donorId])}}">Detail</a>
+                            </td>
 
                         </tr>
                     @endforeach
 
                     </tbody>
+
                 </table>
+
             </div>
+
         </div>
     </div>
+    {{ $donor->links() }}
 
 
 

@@ -27,6 +27,7 @@ class HomeController extends Controller
     }
 
     public function reg()
+
     {
         return view('layouts.register');
     }
@@ -55,6 +56,7 @@ class HomeController extends Controller
         $form->donatingDate->$request->input('donatingDate');
         $form->status->$request->input('status');
         $form->save();
+
         return redirect('/log');
 
 

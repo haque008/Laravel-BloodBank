@@ -27,6 +27,8 @@ Route::get('/home', 'MainController@index')->name('home');
 Route::get('/donor_list', 'PublicController@donorList')->name('donor');
 Route::post('/request-blood', 'PublicController@store')->name('blood-request');
 Route::get('/requestList', 'PublicController@requestList')->name('requestList');
+Route::get('donor/{id}', 'PublicController@show')->name('donor_profile');
+
 Route::get('/request-blood', 'PublicController@requestBlood')->name('request-blood');
 Route::get('/reg', 'HomeController@reg')->name('reg');
 //Route::get('/info', 'HomeController@form')->name('info');

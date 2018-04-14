@@ -4,7 +4,7 @@
   <title>BloodBank</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap.min.css') }}"
+  <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{ url('https://bootswatch.com/4/united/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url('assets/css/slider.css') }}">
@@ -28,13 +28,18 @@
       </li>
 
       <li class="nav-item">
-        <a style="padding-left: 45px; font-size: 16px;color: #F1F2F1;" class="nav-link" href="#">Health Tips</a>
+        <a style="padding-left: 45px; font-size: 16px;color: #F1F2F1;" class="nav-link" href="https://www.healthline.com/nutrition/27-health-and-nutrition-tips">Health Tips</a>
       </li>
       <li class="nav-item">
         <a style="padding-left: 45px; font-size: 16px;color: #F1F2F1;" class="nav-link" href="{{route('requestList')}}">Blood Request</a>
       </li>  <li class="nav-item">
         <a style="padding-left: 45px; font-size: 16px;color: #F1F2F1;" class="nav-link" href="{{route('donor')}}">Donors</a>
       </li>
+      @if (Auth::check())
+      <li class="nav-item">
+        <a style="padding-left: 45px; font-size: 16px;color: #F1F2F1;" class="nav-link" href="{{ route('form.show',['id'=> Auth::user()->id])}}">{{Auth::user()->firstName }}</a>
+      </li>
+        @endif
     </ul>
 </nav>
 <br>

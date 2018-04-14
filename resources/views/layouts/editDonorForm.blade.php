@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 @section('title','Donor Form')
 @section('content')
 
@@ -6,23 +6,16 @@
         <div style="text-align: center;" class="card-header">
             <strong>Donor</strong> <strong>Information</strong>
         </div>
-
-        @if(count($errors)>0)
-
-            @foreach($errors->all() as $error)
-                <p class="alert alert-danger">{{$error}}</p>
-            @endforeach
-        @endif
-
-
         <div class="card-block">
-            <form action="{{route('form.store')}}" method="post" class="form-horizontal ">
+            <form action="{{route('form.update',['id'=> Auth::user()->id])}}"  method="post" class="form-horizontal ">
                 {{ csrf_field() }}
 
+
+                {{ method_field('PATCH') }}
                 <div class="form-group row">
-                    <label class="col-md-3 form-control-label" >Name</label>
+                    <label class="col-md-3 form-control-label"  >Name</label>
                     <div class="col-md-9">
-                        <input type="text"  name="fullName" class="form-control" placeholder="Enter Your name">
+                        <input type="text"  name="fullName" class="form-control"  value="{{$form->fullName}}">
                         <span class="help-block"></span>
                     </div>
                 </div>
@@ -30,14 +23,14 @@
                     <label class="col-md-3 form-control-label" for="select">Blood Group</label>
                     <div class="col-md-9">
                         <select id="select" name="bloodGroup" class="form-control" size="1">
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
+                            <option value="A+" {{ $form->bloodGroup == 'A+' ? 'selected' : '' }}>A+</option>
+                            <option value="A-" {{ $form->bloodGroup == 'A-' ? 'selected' : '' }}>A-</option>
+                            <option value="AB+" {{ $form->bloodGroup == 'AB+' ? 'selected' : ''}}>AB+</option>
+                            <option value="AB-" {{ $form->bloodGroup == 'AB-' ? 'selected' : ''}}>AB-</option>
+                            <option value="B+" {{ $form->bloodGroup == 'B+' ? 'selected' : '' }}>B+</option>
+                            <option value="B-" {{ $form->bloodGroup == 'B-' ? 'selected' : '' }}>B-</option>
+                            <option value="O+" {{ $form->bloodGroup == 'O+' ? 'selected' : '' }}>O+</option>
+                            <option value="O-" {{ $form->bloodGroup == 'O-' ? 'selected' : '' }}>O-</option>
                         </select>
                     </div>
                 </div>
@@ -45,7 +38,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Age</label>
                     <div class="col-md-9">
-                        <input type="number" min="18" max="70"  name="age" class="form-control" placeholder="Enter Your Age">
+                        <input type="number"  name="age" value="{{$form->age}}" class="form-control" placeholder="Enter Your Age">
                         <span class="help-block"></span>
                     </div>
                 </div>
@@ -53,7 +46,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" for="select">Gender</label>
                     <div class="col-md-9">
-                        <select id="select" name="gender" class="form-control" size="1">
+                        <select id="select" name="gender"value="{{$form->gender}}" class="form-control" size="1">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
@@ -62,87 +55,85 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Weight</label>
                     <div class="col-md-9">
-                        <input type="number"  name="weight" min="50" max="150" class="form-control" placeholder="Enter Your Weight">
+                        <input type="number"  name="weight" value="{{$form->weight}}" class="form-control" placeholder="Enter Your Weight">
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Phone Number</label>
                     <div class="col-md-9">
-                        <input type="number"  name="phoneNumber" class="form-control" placeholder="Enter Your PhoneNumber">
+                        <input type="number"  name="phoneNumber" value="{{$form->phoneNumber}}" class="form-control" placeholder="Enter Your PhoneNumber">
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" for="textarea-input">Address</label>
                     <div class="col-md-9">
-                        <textarea id="textarea-input" name="address" rows="9" class="form-control" placeholder="Address.."></textarea>
+                        <textarea id="textarea-input" name="address"  rows="9" class="form-control" placeholder="Address..">{{$form->address}}</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" for="select">Status</label>
                     <div class="col-md-9">
                         <select id="select" name="status" class="form-control" size="1">
-                            <option value="Available">Available</option>
-                            <option value="Unavailable">Unavailable</option>
+                            <option value="Available"{{ $form->status == 'Available' ? 'selected' : '' }}>Available</option>
+                            <option value="Unavailable"{{ $form->status== 'Unavailabe' ? 'selected' : '' }}>Unavailable</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Donating Date</label>
                     <div class="col-md-9">
-                        <input type="date"  name="donatingDate" class="form-control" placeholder="">
+                        <input type="date"  name="donatingDate" value="{{$form->donatingDate}}"  class="form-control">
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >City</label>
                     <div class="col-md-9">
-                        <input type="text"  name="city" class="form-control" placeholder="">
+                        <input type="text"  name="city" value="{{$form->city}}" class="form-control" placeholder="">
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Upazila</label>
                     <div class="col-md-9">
-                        <input type="text"  name="upazila" class="form-control" placeholder="">
+                        <input type="text"  name="upazila" value="{{$form->upazila}}" class="form-control" placeholder="">
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3 form-control-label" for="select">Blood Unit</label>
+                    <label class="col-md-3 form-control-label" >Blood Unit</label>
                     <div class="col-md-9">
-                        <select id="select" name="gender" class="form-control" size="1">
-                            <option value="Badhan">Badhan</option>
-                            <option value="Sondhani">Sondhani</option>
-                        </select>
+                        <input type="text"  name="bloodUnit" value="{{$form->bloodUnit}}" class="form-control" placeholder="">
+                        <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Blood Unit Section</label>
                     <div class="col-md-9">
-                        <input type="text"  name="bloodUnitSection" class="form-control" placeholder="">
+                        <input type="text"  name="bloodUnitSection"  value="{{$form->bloodUnitSection}}" class="form-control" placeholder="">
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Blood Unit City</label>
                     <div class="col-md-9">
-                        <input type="text"  name="bloodUnitCity" class="form-control" placeholder="">
-                        <span class="help-block"></span>
-                    </div>
+                    <input type="text"  name="bloodUnitCity"  value="{{$form->bloodUnitCity}}" class="form-control" placeholder="">
+                    <span class="help-block"></span>
                 </div>
-        <div class="card-footer">
-            <button  style="margin-left: 250px;" type="submit" class="btn btn-sm btn-success"> Submit</button>
-            <button type="reset" class="btn btn-sm btn-danger"> Reset</button>
-        </div>
+                </div>
+
+                    <div class="col-md-9">
+                    <input  style="margin-left: 250px;" value="update" type="submit" class="btn btn-sm btn-success">
+                    <button type="reset" class="btn btn-sm btn-danger"> Reset</button>
+                </div>
             </form>
+        </div>
+
     </div>
 
-
-    </div>
-
-    @endsection
+@endsection
 @section('script')
 
-    @endsection
+@endsection

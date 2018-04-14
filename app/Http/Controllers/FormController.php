@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\StoreForm;
 use Illuminate\Http\Request;
 use App\Donor;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {
@@ -16,11 +18,11 @@ class FormController extends Controller
      */
     public function index()
     {
-        $form=Donor::all();
+        //$form=Donor::all();
+        $form = DB::table('donors')->Paginate(2);
 
 
-
-        return view('layouts.newdashboard',compact('form'));
+        return view('layouts.alldonor', compact('form'));
     }
 
     /**
@@ -36,18 +38,19 @@ class FormController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreForm $request)
     {
-        $form=new Donor;
+
+        $form = new Donor;
         $form->fullName = $request->input('fullName');
         $form->bloodGroup = $request->input('bloodGroup');
-        $form->age = $request->input('age');
-        $form->gender = $request->input('gender');
         $form->donorId = Auth::user()->id;
         $form->donorEmail = Auth::user()->email;
+        $form->age = $request->input('age');
+        $form->gender = $request->input('gender');
         $form->weight = $request->input('weight');
         $form->phoneNumber = $request->input('phoneNumber');
         $form->address = $request->input('address');
@@ -55,55 +58,100 @@ class FormController extends Controller
         $form->status = $request->input('status');
         $form->upazila = $request->input('upazila');
         $form->city = $request->input('city');
+        $form->BloodUnit = $request->input('bloodUnit');
+        $form->BloodUnitSection = $request->input('bloodUnitSection');
+        $form->BloodUnitCity = $request->input('bloodUnitCity');
+
         $form->save();
         return redirect('form');
+
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $form = Donor::where('donorId',$id)->get();
+        $form = Donor::where('donorId', $id)->first();
 
-        return view('layouts.mydashboard',compact('form'));
+        return view('layouts.donorDetail', compact('form'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $form = Donor::where('donorId', $id)->first();
+
+        return view('layouts.editDonorForm', compact('form'));
     }
+
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+//        $form = Donor::where('donorId', $id)->get();
+//
+//        $form->fullName = $request->input('fullName');
+//        $form->bloodGroup = $request->input('bloodGroup');
+//        $form->age = $request->input('age');
+//        $form->gender = $request->input('gender');
+//        $form->donorId = Auth::user()->id;
+//        $form->donorEmail = Auth::user()->email;
+//        $form->weight = $request->input('weight');
+//        $form->phoneNumber = $request->input('phoneNumber');
+//        $form->address = $request->input('address');
+//        $form->donatingDate = $request->input('donatingDate');
+//        $form->status = $request->input('status');
+//        $form->upazila = $request->input('upazila');
+//        $form->city = $request->input('city');
+//        $form->BloodUnit = $request->input('bloodUnit');
+//        $form->BloodUnitSection = $request->input('bloodUnitSection');
+//        $form->BloodUnitCity = $request->input('bloodUnitCity');
+//
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+
+        $data = $request->all();
+        $donor = Donor::where('donorId', $id)->first();
+
+        $donor->fullName = $data['fullName'];
+        $donor->bloodGroup = $data['bloodGroup'];
+        $donor->age = $data['age'];
+        $donor->gender = $data['gender'];
+        $donor->weight = $data['weight'];
+        $donor->phoneNumber = $data['phoneNumber'];
+        $donor->address = $data['address'];
+        $donor->donatingDate = $data['donatingDate'];
+        $donor->status = $data['status'];
+        $donor->upazila = $data['upazila'];
+        $donor->city = $data['city'];
+        $donor->bloodUnit = $data['bloodUnit'];
+        $donor->bloodUnitSection = $data['bloodUnitSection'];
+        $donor->bloodUnitCity = $data['bloodUnitCity'];
+
+
+        if ($donor->update()) {
+            return redirect()
+                ->route('form.index');
+        } else {
+            return redirect()
+                ->route('form.edit');
+
+        }
+
     }
 }

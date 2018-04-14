@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 @section('title','MY info')
 @section('content')
 
@@ -20,6 +20,9 @@
                         <th>Address</th>
                         <th>City</th>
                         <th>Status</th>
+                        <th>Blood Unit</th>
+                        <th> Blood Unit Section</th>
+                        <th> Blood Unit city</th>
                         <th>Action</th>
 
                     </tr>
@@ -37,6 +40,10 @@
                     <td>{{$forms->address}}</td>
                     <td>{{$forms->city}}</td>
                     <td>{{$forms->status}}</td>
+                    <td>{{$forms->bloodUnit}}</td>
+                    <td>{{$forms->bloodUnitSection}}</td>
+                    <td>{{$forms->bloodUnitCity}}</td>
+
                     <td>
                         <a type="submit" class="btn btn-primary" href="{{ route('form.show',['id'=> Auth::user()->id])}}">Detail</a>
                     </td>

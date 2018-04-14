@@ -44,14 +44,14 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Patient Name</label>
                     <div class="col-md-9">
-                        <input type="text"  name="patientName" class="form-control" placeholder="Enter Your Weight">
+                        <input type="text"  name="patientName" class="form-control" placeholder="Enter Patient Name">
                         <span class="help-block"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >City</label>
                     <div class="col-md-9">
-                        <input type="text"  name="city" class="form-control" placeholder="Enter Your PhoneNumber">
+                        <input type="text"  name="city" class="form-control" placeholder="Enter Your City">
                         <span class="help-block"></span>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Phone Number</label>
                     <div class="col-md-9">
-                        <input type="number"  name="phone" class="form-control" placeholder="Enter Your PhoneNumber">
+                        <input type="text"  name="phone" class="form-control" placeholder="Enter Your PhoneNumber">
                         <span class="help-block"></span>
                     </div>
                 </div>
