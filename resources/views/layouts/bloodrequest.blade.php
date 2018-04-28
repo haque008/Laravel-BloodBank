@@ -6,6 +6,15 @@
         <div style="text-align: center;" class="card-header">
             <strong>Donor</strong> <strong>Information</strong>
         </div>
+
+
+        @if(count($errors)>0)
+
+            @foreach($errors->all() as $error)
+                <p class="alert alert-danger">{{$error}}</p>
+            @endforeach
+        @endif
+
         <div class="card-block">
             <form action="{{route('blood-request')}}" method="post" class="form-horizontal ">
                 {{ csrf_field() }}
@@ -71,7 +80,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" for="textarea-input">Note (Optional)</label>
                     <div class="col-md-9">
-                        <textarea id="textarea-input" name="note" rows="9" class="form-control" placeholder="Address.."></textarea>
+                        <textarea id="textarea-input" name="note" rows="9" class="form-control" placeholder="leave a note..."></textarea>
                     </div>
                 </div>
 

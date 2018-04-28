@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Donor;
 use App\Seeker;
+use App\Http\Requests\SeekerForm;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,7 @@ class PublicController extends Controller
     public function donorList()
     {
      // $donor=Donor::all();
-        $donor=DB::table('donors')->simplePaginate(3);
+        $donor=DB::table('donors')->simplePaginate(6);
       return view('layouts.publicDonorList',compact('donor'));
     }
 
@@ -28,7 +29,7 @@ class PublicController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(SeekerForm $request)
     {
         $seeker=new Seeker;
         $seeker->seekerName = $request->input('seekerName');
@@ -51,7 +52,8 @@ class PublicController extends Controller
 
         return view('layouts.donorProfile',compact('form'));
     }
-
+     
+   
 
 
 }

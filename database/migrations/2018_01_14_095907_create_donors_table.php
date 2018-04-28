@@ -34,6 +34,7 @@ class CreateDonorsTable extends Migration
             $table->string('bloodUnit');
             $table->string('bloodUnitSection');
             $table->string('bloodUnitCity');
+            $table->string('image');
         });
     }
 

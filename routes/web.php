@@ -35,9 +35,15 @@ Route::get('/reg', 'HomeController@reg')->name('reg');
 Route::post('/log', 'HomeController@store')->name('log');
 Route::resource('form','FormController');
 
-
-
 Route::get('/request', 'HomeController@requestBlood')->name('request');
+Route::get('/mail/{id}','mailController@index')->name('mail');
+Route::post('sendmail','mailController@send')->name('sendmail');
+Route::get('/searchDonor','SearchController@index')->name('search');
+
+Route::post('/search','SearchController@search');
+Route::get('/badhan','SearchController@badhan')->name('badhan');
+Route::post('/badhan-result','SearchController@badhanSearch')->name('searchResult');
+
 
 
 

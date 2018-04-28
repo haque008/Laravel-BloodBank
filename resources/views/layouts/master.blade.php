@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{ url('Icon.png') }}">
     <title>@yield('title')</title>
 
-
+    
     <!-- Plugins and scripts required by this views -->
 
     <!-- Icons -->
@@ -22,6 +22,8 @@
     <link href="{{ url('assets/asset/css/glyphicons-filetypes.css') }}" rel="stylesheet">
     <link href="{{ url('assets/asset/css/glyphicons-social.css') }}" rel="stylesheet">
     <link href="{{ url('assets/asset/css/sweetalert2.min.css') }}" rel="stylesheet">
+   
+    
 
 
     <!-- Main styles for this application -->
@@ -30,33 +32,39 @@
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden" >
-<header class="app-header navbar" style="background-color:rgb(255,80,66); color:red;">
+<header class="app-header navbar" style="background-color:rgb(228,42,32);">
     <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">?</button>
-    <a class="navbar-brand" href="{{route('home')}}" style="background-color:rgb(38,50,56);"><h4 style="text-align: center;color: red ; ">Blood Bank </h4></a>
+    <a class="navbar-brand" href="{{route('home')}}" style="background-color:rgb(228,42,32); --font-family-sans-serif: @method();font-weight: bolder"><h3 style="text-align: center;color: rgb(255,255,255);background-color:rgb(228,42,32); --font-family-sans-serif: @method();font-weight: bolder ">Blood Bank </h3></a>
     <ul class="nav navbar-nav hidden-md-down">
         <li class="nav-item">
-            <a class="nav-link navbar-toggler sidebar-toggler" href="#" style="color: #f1f2f1;">☰</a>
+            <a class="nav-link navbar-toggler sidebar-toggler" href="#" style="color: rgb(255,255,255);">☰</a>
         </li>
 
         <li class="nav-item px-1">
            @if(Auth::check())
-            <a class="nav-link" href="{{ route('form.show',['id'=> Auth::user()->id])}}" style="color:  #fff8c5; font-size: 15px;">My DashBoard</a>
+            <a class="nav-link" href="{{ route('form.show',['id'=> Auth::user()->id])}}" style="font-family:'bree Serif',Serif;color:rgb(255,255,255);font-weight: bolder; font-size: 18px;">My DashBoard</a>
            @endif
         </li>
-
+         @if(Route::current()->getname()=='request-blood')
         <li class="nav-item px-1">
-            <a class="nav-link" href="" style="color:  #fff8c5; font-size: 15px;">Current Time</a>
+            <a class="nav-link" href="{{route('requestList')}}" style="color:rgb(255,255,255); font-size: 16px;">Request List</a>
         </li>
-
+        @elseif(Route::current()->getname()=='requestList')
         <li class="nav-item px-1">
-            <a class="nav-link" href="" style="color:  #fff8c5; font-size: 15px;">Health Tips</a>
+            <a class="nav-link" href="{{route('request-blood')}}" style="color:rgb(255,255,255); font-size: 16px;">Request</a>
         </li>
+        @endif
+
 
 
            @if(Auth::check())
-        <li class="nav-item dropdown">
+            <li class="nav-item push-xl-6">
+                <a class="nav-link" href="" style="color: rgb(255,255,255); font-size: 20px; font-family: "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" font-weight: bolder;"><i class="fa fa-user" style="font-size:18px; color:rgb(255,255,255)">&nbsp;</i>{{Auth::user()->firstName}}</a>
+            </li>
+
+            <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <span  class="hidden-md-down" style="margin-left: 400px; background-color:red; font-weight: bold;"></span>
+                <span  class="hidden-md-down" style="margin-left: 400px; background-color:rgb(228,42,32); font-weight: bold;"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
 
@@ -83,18 +91,18 @@
 
 <div class="app-body">
 
-    <div class="sidebar" style="">
+    <div class="sidebar" style=" background-color: #607D8B">
         <nav class="sidebar-nav">
             <ul class="nav">
                 <li class="nav-item">
 
                     @if(Auth::check())
-                    <a class="nav-link" href="{{route('form.create')}}">
-                        <i class="fa fa-user-plus" style="color: red;" aria-hidden="true"></i><h6 style="color: #fff8c5;">Info</h6>
+                    <a class="nav-link" href="{{route('form.edit',['id'=> Auth::user()->id])}}">
+                        <i class="fa fa-user-plus" style="color:red" aria-hidden="true"></i><h6 style="color:#fff8c5;">Edit</h6>
                     </a>
                         @else
                         <a class="nav-link" >
-                            <i class="fa fa-user-plus" style="color: red;" aria-hidden="true"></i><h6 style="color: #fff8c5;">Tips</h6>
+                            <i class="fa fa-user-plus" style="color: red;" aria-hidden="true"></i><h6 style="color:#fff8c5;">Tips</h6>
                         </a>
 
                         @endif
@@ -103,31 +111,26 @@
                 <li class="nav-item">
                     @if(Auth::check())
                     <a class="nav-link" href="{{route('request')}}">
-                        <i class="fa fa-heartbeat" style="color: red; aria-hidden="true"></i><h6 style="color: #fff8c5;">Blood Request</h6>
+                        <i class="fa fa-heartbeat" style="color: red;" aria-hidden="true"></i><h6 style="color: #fff8c5;">Blood Request</h6>
                     </a>
                         @else
                         <a class="nav-link" href="{{route('requestList')}}">
-                            <i class="fa fa-heartbeat" style="color: red; aria-hidden="true"></i><h6 style="color: #fff8c5;">Blood Request</h6>
+                            <i class="fa fa-heartbeat" style="color: red;" aria-hidden="true"></i><h6 style="color: #fff8c5;">Blood Request</h6>
                         </a>
-                        @endif
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=" {{route('form.index')}}">
-                        <i class="fa fa-users" style="color: red; aria-hidden="true"> </i><h6 style="color: #fff8c5;">Donor List</h6>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">
-                        <i class="fa fa-file-text-o" style="color: red; aria-hidden="true"></i><h6 style="color: #fff8c5;">Current Donor</h6>
-                    </a>
-                </li>
 
+                </li>
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href=" {{route('donor')}}">
+                        <i class="fa fa-users" style="color: red;" aria-hidden="true"> </i><h6 style="color: #fff8c5;">Donor List</h6>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
         
     <!-- Main content -->
-    <main class="main" style="background-color: rgb(189,189,189);" >
+    <main class="main" style="background-color: rgb(255,255,255) ;">
         <div class="container-fluid pt-2">
 
             <div class="animated fadeIn">
@@ -143,7 +146,7 @@
 
 </div>
 
-<footer class="app-footer" style="background-color:black; color: #f1f2f1; text-align: center; height: 15px;">
+<footer class="app-footer" style="background-color:rgb(240,242,247); color:rgb(228,42,32); border-color: rgb(228,32,42); text-align: center; height: 15px; font-weight: bold">
     <span>Follow us on</span>
     <a style="color: black;" href="https://www.facebook.com/ekramul.29" target="_blank"><button type="button" class="btn btn-facebook icon" style="margin-top: 4px"></button></a>
     <a style="color: black;" href="https://plus.google.com/u/0/115503360738141354343" target="_blank"></a><button type="button" class="btn btn-google-plus icon" style="margin-top: 4px">
@@ -169,11 +172,9 @@
 
 <script src="{{ url('assets/asset/js/libs/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('assets/asset/js/libs/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ url('assets/asset/js/sweetalert2.min.js') }}"></script>
-
+<script src="{{url('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
 <!-- Custom scripts required by this view -->
 <script src="{{ url('assets/asset/js/views/tables.js') }}"></script>
-
 @yield('script')
 
 </body>

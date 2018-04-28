@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('availableDonor:deleteSeeker')->everyFiveMinutes();
+         $schedule->command('availableDonor:deleteSeeker');
     }
 
     /**

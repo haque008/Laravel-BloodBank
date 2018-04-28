@@ -2,6 +2,7 @@
 @section('title','Donor Form')
 @section('content')
 
+
     <div class="card" style= font-weight:bolder;">
         <div style="text-align: center;" class="card-header">
             <strong>Donor</strong> <strong>Information</strong>
@@ -16,7 +17,7 @@
 
 
         <div class="card-block">
-            <form action="{{route('form.store')}}" method="post" class="form-horizontal ">
+            <form action="{{route('form.store')}}" method="post" class="form-horizontal " enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="form-group row">
@@ -69,7 +70,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" >Phone Number</label>
                     <div class="col-md-9">
-                        <input type="number"  name="phoneNumber" class="form-control" placeholder="Enter Your PhoneNumber">
+                        <input type="number"  name="phoneNumber" value="01717345051" class="form-control" placeholder="Enter Your PhoneNumber">
                         <span class="help-block"></span>
                     </div>
                 </div>
@@ -96,6 +97,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-md-3 form-control-label" >Image</label>
+                    <div class="col-md-9">
+                        <input type="file"  name="image" class="form-control" placeholder="Insert Image">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-md-3 form-control-label" >City</label>
                     <div class="col-md-9">
                         <input type="text"  name="city" class="form-control" placeholder="">
@@ -112,7 +120,7 @@
                 <div class="form-group row">
                     <label class="col-md-3 form-control-label" for="select">Blood Unit</label>
                     <div class="col-md-9">
-                        <select id="select" name="gender" class="form-control" size="1">
+                        <select id="select" name="bloodUnit" class="form-control" size="1">
                             <option value="Badhan">Badhan</option>
                             <option value="Sondhani">Sondhani</option>
                         </select>

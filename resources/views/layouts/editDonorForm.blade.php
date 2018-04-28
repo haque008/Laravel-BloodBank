@@ -7,7 +7,7 @@
             <strong>Donor</strong> <strong>Information</strong>
         </div>
         <div class="card-block">
-            <form action="{{route('form.update',['id'=> Auth::user()->id])}}"  method="post" class="form-horizontal ">
+            <form enctype="multipart/form-data"; action="{{route('form.update',['id'=> Auth::user()->id])}}"  method="post" class="form-horizontal ">
                 {{ csrf_field() }}
 
 
@@ -103,10 +103,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-3 form-control-label" >Blood Unit</label>
+                    <label class="col-md-3 form-control-label" for="select">Blood Unit</label>
                     <div class="col-md-9">
-                        <input type="text"  name="bloodUnit" value="{{$form->bloodUnit}}" class="form-control" placeholder="">
-                        <span class="help-block"></span>
+                        <select id="select" name="bloodUnit" class="form-control" size="1">
+                            <option value="Badhan"{{ $form->bloodUnit == 'Badhan' ? 'selected' : '' }}>Badhan</option>
+                            <option value="Sondhani"{{ $form->bloodUnit == 'Sondhani' ? 'selected' : '' }}>Sondhani</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -122,6 +124,14 @@
                     <input type="text"  name="bloodUnitCity"  value="{{$form->bloodUnitCity}}" class="form-control" placeholder="">
                     <span class="help-block"></span>
                 </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label" >Image</label>
+                    <div class="col-md-9">
+                        <input type="file"  name="image"  value="" class="form-control" placeholder="Change Image">
+                        <span class="help-block"></span>
+                        <span><img style="height: 120px;width: 80px;" src="{{url('upload/'.$form->image)}}"> </span>
+                    </div>
                 </div>
 
                     <div class="col-md-9">

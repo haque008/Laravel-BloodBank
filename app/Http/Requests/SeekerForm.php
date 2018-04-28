@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreForm extends FormRequest
+class SeekerForm extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,25 +24,16 @@ class StoreForm extends FormRequest
     public function rules()
     {
         return [
-            //'phoneNumber'=>'required|numeric|size:11',
-            'phoneNumber'=>['required','regex: /(^(\+8801|8801|01|008801))[1|5-9]{1}(\d){8}$/'],
+            'phone'=>['required','regex: /(^(\+8801|8801|01|008801))[1|5-9]{1}(\d){8}$/'],
             'bloodGroup'=>'required',
             'city'=>'required',
-            //'weight'=>'required|regex:/[5-9][0-9]{1}/|regex:/(1)[0-9]{2}/',
-            'weight'=>'required',
-
-
-
-        ];
-
-    }
-
-    public function messages()
-    {
-        return [
-
-          'phoneNumber.required'=>'Phone Number please !',
-
+            'requiredDate'=>'required',
+            //'weight'=>'required|regex:/[5-9][0-9]{1}/|regex:/(1)[0-9]{2}/',alpha_num
+            'seekerName'=>'required|alpha_num',
+            'patientName'=>'required|alpha_num',
+            'seekerName'=>'required|alpha_num',
+            'hospitalName'=>'required|alpha_num',
+            'address'=>'required|alpha_num',
         ];
     }
 }

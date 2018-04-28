@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
+use Carbon\Carbon;
+
 class availableDonor extends Command
 {
     /**
@@ -38,6 +40,7 @@ class availableDonor extends Command
      */
     public function handle()
     {
-        DB::table('seekers')->delete();
+        DB::table('seekers')->where('requiredDate','<',carbon::now())->delete();
     }
+
 }

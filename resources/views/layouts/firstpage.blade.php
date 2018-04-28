@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="shortcut icon" class="fa fa-tint" href="{{ url('title/drop.jpg') }}">
   <title>BloodBank</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +26,7 @@
         <a style="padding-left: 45px; font-size: 16px;" class="nav-link" href="{{route('request-blood')}}">Request Blood <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a  style="padding-left: 45px; font-size: 16px; color: #F1F2F1;" class="nav-link" href="#">Serach Donor</a>
+        <a  style="padding-left: 45px; font-size: 16px; color: #F1F2F1;" class="nav-link" href="{{route('search')}}">Serach Donor</a>
       </li>
 
       <li class="nav-item">
@@ -40,6 +42,17 @@
         <a style="padding-left: 45px; font-size: 16px;color: #F1F2F1;" class="nav-link" href="{{ route('form.show',['id'=> Auth::user()->id])}}">{{Auth::user()->firstName }}</a>
       </li>
         @endif
+        <li class="nav-item">
+        <div class="dropdown" style="margin-left: 25px;margin-top: 12px;">
+  <button style="width:120px;height: 30px;font-weight: bolder;font-size: 14px;color:rgb(255,255,255);" class="btn btn-success dropdown" type="button" data-toggle="dropdown">Blood Unit
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a style="width:120px;height: 30px;font-weight: bolder;font-size: 14px;color: rgb(228,42,32);" href="{{route('badhan')}}">Badhan</a></li>
+    <li><a style="width:120px;height: 30px;font-weight: bolder;font-size: 14px;color:rgb(228,42,32);" href="">Sandhani</a></li>
+    
+  </li>
+  </ul>
+</div>
     </ul>
 </nav>
 <br>
@@ -84,15 +97,29 @@
     </a>
   </div>
   
+    @if(Auth::check())
 
-  <div style=" margin-top: 40px; margin-left: 300px; ">
-  <button type="button" class="btn btn-outline-success" style="height: 40px; width: 140px; font-size: 20px; font-family: verdana; text-align: center;" ><a style="color: #F1F2F1; text-decoration: none;" href="{{route('register')}}">Sign Up</a></button>
-  <button type="button" class="btn btn-outline-success" style="height: 40px; width: 140px; font-size: 20px; font-family: verdana; text-align: center; margin-left: 10px;"><a style="color: #F1F2F1; text-decoration: none;" href="{{ route('login') }}">Login</a></button></div>
-</div>
+    <div style=" margin-top: 40px; margin-left: 400px; ">
+    <button type="button" id="swalert" class="btn btn-outline-success" style="height: 40px; width: 140px; font-size: 20px; font-family: verdana; text-align: center; color: #F1F2F1; text-decoration: none;">Sign Up</button>
+
+     <button type="button" class="btn btn-outline-success" style="height: 40px; width: 140px; font-size: 20px; font-family: verdana; text-align: center; margin-left: 10px;"><a style="color: #F1F2F1; text-decoration: none;" href="">Login</a></button></div>
+@else
+    <div style=" margin-top: 40px; margin-left: 400px; ">
+  <button type="button"  class="btn btn-outline-success" style="height: 40px; width: 140px; font-size: 20px; font-family: verdana; text-align: center;" ><a style="color: #F1F2F1; text-decoration: none;" href="{{route('register')}}">Sign Up</a></button>
+   <button type="button" class="btn btn-outline-success" style="height: 40px; width: 140px; font-size: 20px; font-family: verdana; text-align: center; margin-left: 10px;"><a style="color: #F1F2F1; text-decoration: none;" href="{{ route('login') }}">Login</a></button></div>
+@endif
+ 
+
  <!-- <script src="{{url('assets/jquery.min.js')}}"></script>
  <script src="{{url('assets/bootstrap.min.js')}}"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <!-- <script src="{{url('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+    <script>
+
+
+
+      </script>
 </body>
 </html>
  

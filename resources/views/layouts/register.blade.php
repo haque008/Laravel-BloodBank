@@ -13,11 +13,24 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <h1 style="color: #f1f2f1;"> welcome <strong> <br>{{Auth::user()->firstName}}</strong> <strong>{{Auth::user()->lastName}} !!</strong> </h1>
-                        <h3>You are now registered!</h3>
+                
+                     
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+
+
+    <script>
+        swal("Good job!", "Now complete Your Profile, Go To Info Section", "success",{
+
+            timer:3000,
+            buttons:false,
+        });
+    </script>
+
 @endsection

@@ -18,7 +18,7 @@ class FormController extends Controller
      */
     public function index()
     {
-        //$form=Donor::all();
+        //$form=Donor::all($id);
         $form = DB::table('donors')->Paginate(2);
 
 
@@ -52,18 +52,34 @@ class FormController extends Controller
         $form->age = $request->input('age');
         $form->gender = $request->input('gender');
         $form->weight = $request->input('weight');
-        $form->phoneNumber = $request->input('phoneNumber');
+        $form->phoneNumber =$request->input('phoneNumber');
         $form->address = $request->input('address');
         $form->donatingDate = $request->input('donatingDate');
         $form->status = $request->input('status');
         $form->upazila = $request->input('upazila');
         $form->city = $request->input('city');
-        $form->BloodUnit = $request->input('bloodUnit');
-        $form->BloodUnitSection = $request->input('bloodUnitSection');
-        $form->BloodUnitCity = $request->input('bloodUnitCity');
+        $form->bloodUnit = $request->input('bloodUnit');
+        $form->bloodUnitSection = $request->input('bloodUnitSection');
+        $form->bloodUnitCity = $request->input('bloodUnitCity');
+
+        if($request->file('image')){
+
+            $file=$request->file('image');
+            $ext=$file->getClientOriginalExtension();
+            $token=sha1(time());
+            $prefix='donor';
+            $name=$prefix.'_'.$token.'.'.$ext;
+            $path='upload';
+            $file->move($path,$name);
+            $image=$name;
+        }
+        else
+            $image='donor.jpg';
+        $form->image =$image;
+
 
         $form->save();
-        return redirect('form');
+      return redirect('form');
 
 
     }
@@ -142,6 +158,21 @@ class FormController extends Controller
         $donor->bloodUnit = $data['bloodUnit'];
         $donor->bloodUnitSection = $data['bloodUnitSection'];
         $donor->bloodUnitCity = $data['bloodUnitCity'];
+        if($request->file('image')){
+
+            $file=$request->file('image');
+            $ext=$file->getClientOriginalExtension();
+            $token=sha1(time());
+            $prefix='donor';
+            $name=$prefix.'_'.$token.'.'.$ext;
+            $path='upload';
+            $file->move($path,$name);
+            $image=$name;
+        }
+        else
+            $image=$donor->image;
+
+
 
 
         if ($donor->update()) {
